@@ -1,11 +1,11 @@
 body{
   background-color: #222;
   color: #ccc;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .movie-line > .row {
   overflow-x: auto;
   flex-wrap: nowrap;
-  width: 33%;
 }
 
 p {
@@ -13,3 +13,18 @@ p {
 	margin-bottom: 1rem;
 	margin-left: 1rem;
 }
+
+img {
+  width: 100px;
+  height: 150px;
+  display: inline;
+  border: #aaa solid 1px;
+  border-radius: 6px;
+  margin: 4px;
+  transition: transform 400ms;
+}
+img:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+}
+

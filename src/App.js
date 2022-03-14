@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import MovieList from './components/MovieList';
 import MovieListHeader from './components/MovieListHeader';
 import SearchBox from './components/SearchBox';
+import AddToList from './components/AddToList';
+import RemoveFromList from './components/RemoveFromList';
 
 function App() {
   const [movies, setMovies] = useState([
@@ -15,6 +17,8 @@ function App() {
       "Poster": "https://m.media-amazon.com/images/M/MV5BMmQ2MmU3NzktZjAxOC00ZDZhLTk4YzEtMDMyMzcxY2IwMDAyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
     }
   ]);
+
+  const [added, setAdded] = useState([]);
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -34,16 +38,34 @@ function App() {
     getMovieRequest(searchValue);
   }, [searchValue]);
 
+  const addMovieToList = (movie) => {
+    const newWatchList = [...added, movie];
+    setAdded(newWatchList);
+  }
+
+  const removeFromList = (movie) => {
+    const newWatchList = added.filter((added) => added.imdbID !== movie.imdbID);
+    setAdded(newWatchList);
+  }
+
   return (
     <div className='container-fluid movie-line'>
-      <div className='row d-flex align-items-center'>
+      <div className=''>
         <MovieListHeader heading="Movie-Picker" />
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
 
-      <div className='row'>
-        <MovieList movies={movies} />
+      <div className=''>
+        <MovieList
+          movies={movies}
+          addToListComponent={AddToList}
+          handleAddsClick={addMovieToList} />
       </div>
+      <MovieListHeader heading="Watch-List" />
+      <MovieList
+        movies={added}
+        addToListComponent={RemoveFromList}
+        handleAddsClick={removeFromList} />
     </div>
   );
 }
