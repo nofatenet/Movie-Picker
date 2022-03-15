@@ -45,8 +45,17 @@ function App() {
   }, [searchValue]);
 
   const addMovieToList = (movie) => {
-    const newWatchList = [...added, movie];
-    setAdded(newWatchList);
+
+    if (!added.includes(movie)) {
+
+      //Checking if Movie is already on the List
+
+      //console.log("added: ", added);
+      //console.log("movie: ", movie);
+
+      const newWatchList = [...added, movie];
+      setAdded(newWatchList);
+    }
   }
 
   const removeFromList = (movie) => {
