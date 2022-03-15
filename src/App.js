@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 //import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
+import './tooltip.css';
 import MovieList from './components/MovieList';
 import MovieListHeader from './components/MovieListHeader';
 import SearchBox from './components/SearchBox';
@@ -35,6 +36,11 @@ function App() {
   };
 
   useEffect(() => {
+
+    // setTimeout(
+    //   getMovieRequest(searchValue),
+    //   5000);
+
     getMovieRequest(searchValue);
   }, [searchValue]);
 
@@ -51,6 +57,7 @@ function App() {
   return (
     <div className='container-fluid movie-line'>
       <div className=''>
+        <img src="./images/mp-title.png" alt='movie-picker-title'></img>
         <MovieListHeader heading="Movie-Picker" />
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
