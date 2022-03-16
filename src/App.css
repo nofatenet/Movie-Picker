@@ -14,7 +14,7 @@ p {
 	margin-left: 1rem;
 }
 
-img {
+.images {
   width: 100px;
   height: 150px;
   display: inline;
@@ -23,8 +23,19 @@ img {
   margin: 4px;
   transition: transform 400ms;
 }
-img:hover{
+.images:hover{
   cursor: pointer;
   transform: scale(1.2);
 }
 
+.title{
+  margin: -16px;
+}
+
+.results{
+  max-width: 600px;
+  background-color: #151515;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}

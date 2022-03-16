@@ -10,6 +10,7 @@ const MovieList = (props) => {
                     className="tooltip">
                     <img
                         src={movieItem.Poster}
+                        className="images"
                         alt="movie"
                         //title={movieItem.Title + ' (' + movieItem.Year + ')'}
                         onClick={() => props.handleAddsClick(movieItem)}>

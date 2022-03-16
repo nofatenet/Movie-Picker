@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 //import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import './tooltip.css';
+import mptitle from './images/mptitle.png';
 import MovieList from './components/MovieList';
 import MovieListHeader from './components/MovieListHeader';
 import SearchBox from './components/SearchBox';
@@ -32,16 +33,23 @@ function App() {
     // console.log(responseJson);
     if (responseJson.Search) {
       setMovies(responseJson.Search);
+      console.log("Aufruf API");
     }
   };
 
   useEffect(() => {
 
-    // setTimeout(
-    //   getMovieRequest(searchValue),
-    //   5000);
+    let timeOutId = setTimeout(() => {
+      getMovieRequest(searchValue);
+    },
+      1000);
 
-    getMovieRequest(searchValue);
+    return () => {
+      clearTimeout(timeOutId);
+      console.log("Debounce greift");
+    }
+
+    //getMovieRequest(searchValue);
   }, [searchValue]);
 
   const addMovieToList = (movie) => {
@@ -66,22 +74,27 @@ function App() {
   return (
     <div className='container-fluid movie-line'>
       <div className=''>
-        <img src="./images/mp-title.png" alt='movie-picker-title'></img>
-        <MovieListHeader heading="Movie-Picker" />
+        <img src={mptitle} alt='movie-picker-title' className='title'></img>
+
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
 
-      <div className=''>
+      <MovieListHeader heading="Ergebnisse:" />
+      <div className='results'>
         <MovieList
           movies={movies}
           addToListComponent={AddToList}
           handleAddsClick={addMovieToList} />
       </div>
-      <MovieListHeader heading="Watch-List" />
-      <MovieList
-        movies={added}
-        addToListComponent={RemoveFromList}
-        handleAddsClick={removeFromList} />
+
+      <MovieListHeader heading="Watch-List:" />
+      <div className='results'>
+        <MovieList
+          movies={added}
+          addToListComponent={RemoveFromList}
+          handleAddsClick={removeFromList} />
+      </div>
+
     </div>
   );
 }
