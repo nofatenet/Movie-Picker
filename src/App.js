@@ -8,16 +8,17 @@ import MovieListHeader from './components/MovieListHeader';
 import SearchBox from './components/SearchBox';
 import AddToList from './components/AddToList';
 import RemoveFromList from './components/RemoveFromList';
+import FileSaver from './FileSaver';
 
 function App() {
   const [movies, setMovies] = useState([
-    {
-      "Title": "Alien",
-      "Year": "1979",
-      "imdbID": "tt0078748",
-      "Type": "movie",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BMmQ2MmU3NzktZjAxOC00ZDZhLTk4YzEtMDMyMzcxY2IwMDAyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
-    }
+    // {
+    //   "Title": "Alien",
+    //   "Year": "1979",
+    //   "imdbID": "tt0078748",
+    //   "Type": "movie",
+    //   "Poster": "https://m.media-amazon.com/images/M/MV5BMmQ2MmU3NzktZjAxOC00ZDZhLTk4YzEtMDMyMzcxY2IwMDAyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
+    // }
   ]);
 
   const [added, setAdded] = useState([]);
@@ -52,6 +53,16 @@ function App() {
     //getMovieRequest(searchValue);
   }, [searchValue]);
 
+  useEffect(() => {
+    const savedList = JSON.parse(localStorage.getItem("movie-picker-list"));
+
+    setAdded(savedList);
+  }, []);
+
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("movie-picker-list", JSON.stringify(items));
+  };
+
   const addMovieToList = (movie) => {
 
     if (!added.includes(movie)) {
@@ -63,12 +74,25 @@ function App() {
 
       const newWatchList = [...added, movie];
       setAdded(newWatchList);
+
+      saveToLocalStorage(newWatchList);
     }
   }
 
   const removeFromList = (movie) => {
     const newWatchList = added.filter((added) => added.imdbID !== movie.imdbID);
     setAdded(newWatchList);
+
+    saveToLocalStorage(newWatchList);
+  }
+
+  const generateFile = () => {
+    console.log("ok");
+    let name = "File";
+    let data = JSON.stringify(added);
+
+    var blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+    FileSaver.saveAs(blob, name);
   }
 
   return (
@@ -94,7 +118,7 @@ function App() {
           addToListComponent={RemoveFromList}
           handleAddsClick={removeFromList} />
       </div>
-
+      <button className='btnSave' onClick={generateFile}>Datei speichern</button>
     </div>
   );
 }

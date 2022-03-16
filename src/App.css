@@ -39,3 +39,20 @@ p {
   padding: 8px;
   text-align: center;
 }
+
+.btnSave{
+  font-size: 1em;
+  padding: 1em;
+  color: #ccc;
+  background-color: #151515;
+  margin: 1em;
+  cursor: pointer;
+}
+
+.searchInput{
+    font-size: 1em;
+    padding: 4px;
+    color: #ccc;
+    background-color: #111;
+    margin-top: 1em;
+}
