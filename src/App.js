@@ -11,6 +11,7 @@ import RemoveFromList from './components/RemoveFromList';
 import FileSaver from './FileSaver';
 
 function App() {
+
   const [movies, setMovies] = useState([
     // {
     //   "Title": "Alien",
@@ -31,7 +32,6 @@ function App() {
     const response = await fetch(url);
     const responseJson = await response.json();
 
-    // console.log(responseJson);
     if (responseJson.Search) {
       setMovies(responseJson.Search);
       console.log("Aufruf API");
@@ -50,7 +50,6 @@ function App() {
       console.log("Debounce greift");
     }
 
-    //getMovieRequest(searchValue);
   }, [searchValue]);
 
   useEffect(() => {
@@ -66,37 +65,29 @@ function App() {
   const addMovieToList = (movie) => {
 
     if (!added.includes(movie)) {
-
-      //Checking if Movie is already on the List
-
-      //console.log("added: ", added);
-      //console.log("movie: ", movie);
-
       const newWatchList = [...added, movie];
       setAdded(newWatchList);
 
       saveToLocalStorage(newWatchList);
     }
-  }
+  };
 
   const removeFromList = (movie) => {
     const newWatchList = added.filter((added) => added.imdbID !== movie.imdbID);
     setAdded(newWatchList);
 
     saveToLocalStorage(newWatchList);
-  }
+  };
 
   const generateFile = () => {
-    console.log("ok");
     let name = "File";
     let data = JSON.stringify(added);
-
-    var blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+    let blob = new Blob([data], { type: "text/plain;charset=utf-8" });
     FileSaver.saveAs(blob, name);
-  }
+  };
 
   return (
-    <div className='container-fluid movie-line'>
+    <div className='movie-line'>
       <div className=''>
         <img src={mptitle} alt='movie-picker-title' className='title'></img>
 

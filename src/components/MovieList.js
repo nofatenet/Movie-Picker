@@ -1,4 +1,5 @@
 import React from "react";
+import imdb from '../images/imdb.png';
 
 const MovieList = (props) => {
     const AddToListComponent = props.addToListComponent;
@@ -12,13 +13,24 @@ const MovieList = (props) => {
                         src={movieItem.Poster}
                         className="images"
                         alt="movie"
-                        //title={movieItem.Title + ' (' + movieItem.Year + ')'}
                         onClick={() => props.handleAddsClick(movieItem)}>
                     </img>
+
                     <AddToListComponent />
-                    <span className="tooltiptext">
-                        {movieItem.Title + ' (' + movieItem.Year + ')'}
-                    </span>
+
+                    <div className="tooltiptext">
+                        <span>
+                            {movieItem.Title + ' (' + movieItem.Year + ')'}
+                        </span>
+                        <p>
+                            <a
+                                href={`https://www.imdb.com/title/${movieItem.imdbID}`}
+                                target="_blank"
+                                rel="noreferrer">
+                                <img src={imdb} alt="imdb link"></img>
+                            </a>
+                        </p>
+                    </div>
                 </div>
             )
             }
