@@ -10,7 +10,7 @@ const SearchBox = (props) => {
                 }
                 placeholder="Suche...">
             </input>
-            <p></p>
+            <a href="https://www.omdbapi.com/" target="_blank" rel="noreferrer">OMDB</a><span> durchsuchen</span>
         </div>
     )
 };

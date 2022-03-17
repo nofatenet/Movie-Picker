@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-//import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import './tooltip.css';
 import mptitle from './images/mptitle.png';
 import MovieList from './components/MovieList';
 import MovieListHeader from './components/MovieListHeader';
 import SearchBox from './components/SearchBox';
-import AddToList from './components/AddToList';
-import RemoveFromList from './components/RemoveFromList';
 import FileSaver from './FileSaver';
 
 function App() {
@@ -39,7 +36,6 @@ function App() {
   };
 
   useEffect(() => {
-
     let timeOutId = setTimeout(() => {
       getMovieRequest(searchValue);
     },
@@ -49,7 +45,6 @@ function App() {
       clearTimeout(timeOutId);
       console.log("Debounce greift");
     }
-
   }, [searchValue]);
 
   useEffect(() => {
@@ -98,7 +93,6 @@ function App() {
       <div className='results'>
         <MovieList
           movies={movies}
-          addToListComponent={AddToList}
           handleAddsClick={addMovieToList} />
       </div>
 
@@ -106,10 +100,9 @@ function App() {
       <div className='results'>
         <MovieList
           movies={added}
-          addToListComponent={RemoveFromList}
           handleAddsClick={removeFromList} />
       </div>
-      <button className='btnSave' onClick={generateFile}>Datei speichern</button>
+      <button className='btnSave' onClick={generateFile}>Als Datei speichern</button>
     </div>
   );
 }

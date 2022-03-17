@@ -14,6 +14,18 @@ p {
 	margin-left: 1rem;
 }
 
+a{
+  color: #ccc;
+  background-color: #111;
+  text-decoration: none;
+}
+a:visited{
+  color: #aaa;
+}
+a:hover{
+  color: #eee;
+}
+
 .images {
   width: 100px;
   height: 150px;
@@ -50,9 +62,17 @@ p {
 }
 
 .searchInput{
-    font-size: 1em;
+    font-size: 1.5em;
     padding: 4px;
-    color: #ccc;
-    background-color: #111;
+    color: #111;
+    background-color: #ccc;
     margin-top: 1em;
+    margin-right: 0.5em;
+    outline: #111;
+}
+
+.searchInput:focus{
+  color: #ccc;
+  border-color: #111;
+  background-color: #111;
 }

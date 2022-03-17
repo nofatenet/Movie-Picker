@@ -2,7 +2,6 @@ import React from "react";
 import imdb from '../images/imdb.png';
 
 const MovieList = (props) => {
-    const AddToListComponent = props.addToListComponent;
     return (
         <>
             {props.movies.map((movieItem, index) =>
@@ -15,8 +14,6 @@ const MovieList = (props) => {
                         alt="movie"
                         onClick={() => props.handleAddsClick(movieItem)}>
                     </img>
-
-                    <AddToListComponent />
 
                     <div className="tooltiptext">
                         <span>
