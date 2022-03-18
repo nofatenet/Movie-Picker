@@ -18,10 +18,9 @@ function App() {
     //   "Poster": "https://m.media-amazon.com/images/M/MV5BMmQ2MmU3NzktZjAxOC00ZDZhLTk4YzEtMDMyMzcxY2IwMDAyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
     // }
   ]);
-
   const [added, setAdded] = useState([]);
-
   const [searchValue, setSearchValue] = useState("");
+
 
   const getMovieRequest = async (searchValueParams) => {
     const url = `https://www.omdbapi.com/?s=${searchValueParams}&apikey=263d22d8`
@@ -34,6 +33,7 @@ function App() {
       console.log("Aufruf API");
     }
   };
+
 
   useEffect(() => {
     let timeOutId = setTimeout(() => {
@@ -52,6 +52,7 @@ function App() {
 
     setAdded(savedList);
   }, []);
+
 
   const saveToLocalStorage = (items) => {
     localStorage.setItem("movie-picker-list", JSON.stringify(items));
@@ -81,9 +82,10 @@ function App() {
     FileSaver.saveAs(blob, name);
   };
 
+
   return (
     <div className='movie-line'>
-      <div className=''>
+      <div>
         <img src={mptitle} alt='movie-picker-title' className='title'></img>
 
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
