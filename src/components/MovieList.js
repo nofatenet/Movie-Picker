@@ -4,7 +4,7 @@ import imdb from '../images/imdb.png';
 const MovieList = (props) => {
     return (
         <>
-            {props.movies.map((movieItem, index) =>
+            {props.movies ? props.movies.map((movieItem, index) =>
                 <div
                     key={index}
                     className="tooltip">
@@ -30,6 +30,7 @@ const MovieList = (props) => {
                     </div>
                 </div>
             )
+                : <p>No Data</p>
             }
         </>
     )
