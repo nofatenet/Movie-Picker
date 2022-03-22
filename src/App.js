@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './App.css';
 import './tooltip.css';
 import mptitle from './images/mptitle.png';
@@ -83,6 +83,11 @@ function App() {
   };
 
 
+  const ref = useRef(null);
+
+  const imports = ref.value;
+
+
   return (
     <div className='movie-line'>
       <div>
@@ -105,6 +110,11 @@ function App() {
           handleAddsClick={removeFromList} />
       </div>
       <button className='btnSave' onClick={generateFile}>Als Datei speichern</button>
+      <MovieListHeader heading="Import/Export:" />
+      <textarea ref={ref} value={imports} onChange={() => setAdded(added)} />
+      <MovieList
+        movies={imports}
+      />
     </div>
   );
 }
